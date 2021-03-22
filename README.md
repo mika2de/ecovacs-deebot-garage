@@ -1,3 +1,3 @@
-# Kitchen base panel garage door
+# Automated kitchen base panel garage door
 
 tbd.
