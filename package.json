@@ -1,0 +1,20 @@
+{
+  "name": "vacbot-homecoming-observer",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "node server.js"
+    "start": "node server.js"
+  },
+  "devDependencies": {
+    "lite-server": "^2.6.1"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "ecovacs-deebot": "^0.5.6",
+    "express": "^4.17.1",
+    "node-machine-id": "^1.1.12"
+  }
+}

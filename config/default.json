@@ -1,0 +1,6 @@
+{
+    "username": "your username",
+    "password": "your md5 password hash",
+    "esp2866BaseUrl": "http://your-server.io",
+    "countryCode": "DE"
+}
