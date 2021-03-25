@@ -22,7 +22,7 @@ module big_gear(teeth, thickness) {
 module small_gear(teeth, thickness) {
     color([0,0,1]) 
     translate([-2.5,1.5,0])
-    cube([5,5,15]);
+    cube([5,2,15]);
     gear(
         number_of_teeth=teeth,
         circular_pitch=256,
@@ -83,22 +83,27 @@ module male() {
         translate([x_shift, 0, -40]) cylinder(40, r=2.5+tol_x);
     }
 }
+
+module arm() {
     difference() {
-hull() {
-    translate([-7.5,100,0]) cylinder(10-2*tol_z, r=20/2);
-    translate([-47,34,0]) cube([79,1,10-2*tol_z]);
-}
-hull() {
-    translate([-7.5,80,-1]) cylinder(12, r=20/2);
-    translate([-37,34,-1]) cube([59,1,12]);
-}
+        hull() {
+            translate([-7.5,100,0]) cylinder(10-2*tol_z, r=20/2);
+            translate([-47,34,0]) cube([79,1,10-2*tol_z]);
+        }
+        hull() {
+            translate([-7.5,80,-1]) cylinder(12, r=20/2);
+            translate([-37,34,-1]) cube([59,1,12]);
+        }   
+    }
 }
 
 translate([-7.5,0,0]) rotate([0,0,-18]) big_gear(77, 10-tol_z);
+arm();
 
 translate([-78.5,0,0])
 rotate([0,0,0]) small_gear(22, 10-tol_z);
 
 translate([-30.5,0,0]) male();
+
 // my_motor();
 
