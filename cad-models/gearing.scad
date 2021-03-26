@@ -20,9 +20,7 @@ module big_gear(teeth, thickness) {
 }
 
 module small_gear(teeth, thickness) {
-    color([0,0,1]) 
-    translate([-2.5,1.5,0])
-    cube([5,2,15]);
+    color([0,0,1]) translate([-2.5,2,0]) cube([5,2,15]);
     gear(
         number_of_teeth=teeth,
         circular_pitch=256,
@@ -115,10 +113,11 @@ module stick() {
 // gearing
 stick();
 rotate([0,0,-18]) big_gear(77, 10-tol_z);
-translate([0,-40,0]) translate([-71,0,0]) rotate([0,0,0]) small_gear(22, 10-tol_z);
+// translate([0,-40,0]) 
+translate([-71,0,0]) rotate([0,0,0]) small_gear(22, 10-tol_z);
 
 // mount
-// translate([-23,0,0]) mount();
+ translate([-23,0,0]) mount();
 
 // motor
 // nema();
