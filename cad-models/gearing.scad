@@ -14,7 +14,7 @@ module big_gear(teeth, thickness) {
         hub_diameter=5,
         hub_thickness=thickness-tol_z,
         gear_thickness=thickness-tol_z,
-        circles=5
+        circles=3
         // bore_diameter=0
     );
 }
@@ -37,7 +37,7 @@ module small_gear(teeth, thickness) {
     );
 }
 
-module my_motor() {
+module nema() {
     motor(Nema17, NemaShort);
 }
 
@@ -55,8 +55,7 @@ module nema17_hole(depth=10) {
     }
 }
 
-
-module male() {
+module mount() {
     x_shift=23;
     color("grey",1.0)
     difference() {
@@ -80,30 +79,60 @@ module male() {
         translate([-48, 0, -2]) mirror([0, 0, 1]) nema17_hole(20);
         
         // male screw hole
-        translate([x_shift, 0, -40]) cylinder(40, r=2.5+tol_x);
+        translate([x_shift, 0, -40]) cylinder(100, r=2.5+tol_x);
     }
 }
 
-module arm() {
+module stick() {
+    end_x=-110;
+    end_y=40;
     difference() {
-        hull() {
-            translate([-7.5,100,0]) cylinder(10-2*tol_z, r=20/2);
-            translate([-47,34,0]) cube([79,1,10-2*tol_z]);
+        // outer
+        union() {
+            hull() {
+                translate([end_x,end_y,0]) cylinder(10-2*tol_z, r=10);
+                translate([-11,51,0]) cylinder(10-2*tol_z, r=5);
+            }
+            hull() {
+                translate([end_x,end_y,0]) cylinder(10-2*tol_z, r=10);
+                translate([-40,28,0]) cylinder(10-2*tol_z, r=5);
+            }
         }
-        hull() {
-            translate([-7.5,80,-1]) cylinder(12, r=20/2);
-            translate([-37,34,-1]) cube([59,1,12]);
-        }   
+        // inner
+        union() {
+            hull() {
+                translate([end_x+2,end_y,-1]) cylinder(12, r=2);
+                translate([-10,41,-1]) cylinder(12, r=4);
+            }
+            hull() {
+                translate([end_x+2,end_y,-1]) cylinder(12, r=2);
+                translate([-40,37,-1]) cylinder(12, r=4);
+            }
+        }
     }
 }
 
-translate([-7.5,0,0]) rotate([0,0,-18]) big_gear(77, 10-tol_z);
-arm();
+// gearing
+stick();
+rotate([0,0,-18]) big_gear(77, 10-tol_z);
+translate([0,-40,0]) translate([-71,0,0]) rotate([0,0,0]) small_gear(22, 10-tol_z);
 
-translate([-78.5,0,0])
-rotate([0,0,0]) small_gear(22, 10-tol_z);
+// mount
+// translate([-23,0,0]) mount();
 
-translate([-30.5,0,0]) male();
+// motor
+// nema();
 
-// my_motor();
+//module long_arm() {
+//    difference() {
+//        hull() {
+//            translate([-7.5,100,0]) cylinder(10-2*tol_z, r=20/2);
+//            translate([-47,34,0]) cube([79,1,10-2*tol_z]);
+//        }
+//        hull() {
+//            translate([-7.5,80,-1]) cylinder(12, r=20/2);
+//            translate([-37,34,-1]) cube([59,1,12]);
+//        }   
+//    }
+//}
 
