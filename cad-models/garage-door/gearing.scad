@@ -152,4 +152,4 @@ translate([-15.5,0,0]) mount();
 module nema() {
     motor(Nema17, NemaShort);
 }
-//translate([-48-15.5, 0, -5]) rotate([0,0,45]) mirror([0, 0, 1]) nema();
+translate([-48-15.5, 0, -5-20]) rotate([0,0,45]) mirror([0, 0, 1]) nema();
