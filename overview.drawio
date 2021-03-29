@@ -1,6 +1,6 @@
 <mxfile>
     <diagram id="AL7WQzOlPXSPUqngoadJ" name="Page-1">
-        <mxGraphModel dx="734" dy="498" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="#333333" math="0" shadow="0">
+        <mxGraphModel dx="990" dy="498" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="#333333" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -10,14 +10,14 @@
                 <mxCell id="7" value="/start" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="2" target="3">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="15" value="open / close" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;startArrow=none;startFill=0;fontSize=14;" edge="1" parent="1" source="2" target="14">
+                <mxCell id="15" value="open / close" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;startArrow=none;startFill=0;fontSize=14;" edge="1" parent="1" source="2" target="14">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <mxCell id="2" value="&amp;lt;&amp;lt; ESP8266 &amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;&lt;font style=&quot;font-size: 14px&quot;&gt;Garage controller&lt;/font&gt;&lt;/b&gt;&lt;br&gt;&lt;br&gt;(AsyncWebServer:80 )" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="240" y="400" width="150" height="90" as="geometry"/>
                 </mxCell>
                 <mxCell id="8" value="connect to ecovacs API,&lt;br&gt;receive state changes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;startArrow=classic;startFill=1;fontSize=14;" edge="1" parent="1" source="3" target="4">
-                    <mxGeometry x="-0.4545" relative="1" as="geometry">
+                    <mxGeometry x="-0.5455" relative="1" as="geometry">
                         <mxPoint as="offset"/>
                     </mxGeometry>
                 </mxCell>
@@ -25,10 +25,10 @@
                     <mxGeometry x="520" y="400" width="200" height="90" as="geometry"/>
                 </mxCell>
                 <mxCell id="4" value="Ecovacs Server" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-                    <mxGeometry x="550" y="120" width="140" height="60" as="geometry"/>
+                    <mxGeometry x="550" y="180" width="140" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="6" value="" style="html=1;outlineConnect=0;fillColor=#CCCCCC;strokeColor=#6881B3;gradientColor=none;gradientDirection=north;strokeWidth=2;shape=mxgraph.networks.cloud;fontColor=#ffffff;" vertex="1" parent="1">
-                    <mxGeometry x="575" y="255" width="90" height="50" as="geometry"/>
+                    <mxGeometry x="575" y="273" width="90" height="50" as="geometry"/>
                 </mxCell>
                 <mxCell id="11" value="/open" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.75;exitDx=0;exitDy=0;entryX=1;entryY=0.75;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="3" target="2">
                     <mxGeometry relative="1" as="geometry">
@@ -41,8 +41,8 @@
                         <mxPoint x="150" y="445" as="sourcePoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="14" value="Garage door" style="shape=image;html=1;verticalLabelPosition=bottom;verticalAlign=top;imageAspect=1;aspect=fixed;image=img/clipart/Gear_128x128.png" vertex="1" parent="1">
-                    <mxGeometry x="289" y="560" width="52" height="61" as="geometry"/>
+                <mxCell id="14" value="Garage door" style="shape=image;html=1;verticalLabelPosition=bottom;verticalAlign=top;imageAspect=1;aspect=fixed;image=img/clipart/Gear_128x128.png;fontSize=14;" vertex="1" parent="1">
+                    <mxGeometry x="76.5" y="480" width="52" height="61" as="geometry"/>
                 </mxCell>
                 <mxCell id="18" value="" style="pointerEvents=1;verticalLabelPosition=bottom;shadow=0;dashed=0;align=center;html=1;verticalAlign=top;shape=mxgraph.electrical.electro-mechanical.push_switch_no;fontSize=14;" vertex="1" parent="1">
                     <mxGeometry x="60" y="440" width="85" height="19" as="geometry"/>
