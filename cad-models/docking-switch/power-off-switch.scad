@@ -49,8 +49,8 @@ module switchMount() {
         translate([6.6,6.6,-1]) cylinder(7,1,1,$fn=100);
     }     
     switchMountScrewArms();   
-    translate([1,4,17]) cube([8,2,2]);
-    translate([1,14,17]) cube([8,2,2]);
+    translate([1,4,16]) cube([8,2,3]);
+    translate([1,14,16]) cube([8,2,3]);
 }
 
 module switchMountScrewArms() {
@@ -84,7 +84,7 @@ module plate(){
             translate([10,0,10]) cube([10,20,2]);
             translate([-20,-15,-1]) minkowski() {
                 translate([50,0,0]) cube([80,50,2]);
-                translate([20,0,3]) cylinder(h=0.1, r=4);
+                translate([20,0,3.5]) cylinder(h=0.1, r=4);
             }
         }
         translate([20-tol,8-tol,0]) cube([30.4,4.4,15]);
@@ -98,7 +98,7 @@ module plate(){
      translate([0,0,6]) spring_mount(1);
 }
 
-base();
+//base();
+//translate([0,0,-1]) color("LightSlateGray") plate();
 color("red") switchMount();
-translate([0,0,-1]) color("LightSlateGray") plate();
-translate([0,0,-1]) switch();
+//translate([0,0,-1]) switch();

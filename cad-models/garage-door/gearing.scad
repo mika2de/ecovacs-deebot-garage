@@ -1,8 +1,6 @@
 use <MCAD/involute_gears.scad>
 include <MCAD/stepper.scad>
 
-use <MCAD/nuts_and_bolts.scad>
-
 tol_x = .2;
 tol_z = .4;
 gear_thickness=10;
@@ -83,6 +81,10 @@ module small_gear(teeth) {
     );
 }
 
+module nema() {
+    motor(Nema17, NemaShort);
+}
+
 module nema17_hole(depth=10) {
     linear_extrude(depth) minkowski() {
         circle(6);
@@ -97,7 +99,7 @@ module nema17_hole(depth=10) {
     }
 }
 
-module mount() {
+module motorMount() {
     x_shift=2;
     color("grey",1.0)
     difference() {
@@ -107,13 +109,18 @@ module mount() {
                 translate([-48, 0, 0]) cylinder(5-tol_z, r=46/2);
             }
             translate([0, 0, -15]) hull() {
-                translate([x_shift, 0, 25]) cylinder(5, r=46/2);
+                translate([10+x_shift, 0, 25]) cylinder(5, r=46/2);
                 translate([-48, 0, 25]) cylinder(5, r=46/2);
             }
             translate([-48, 0, -5])
-            linear_extrude(20) minkowski() {
-                circle(7.48);
-                rotate([0,0,45]) square([31.04, 31.04], true);
+            hull() {
+                linear_extrude(20) minkowski() {
+                    circle(7.48);
+                    rotate([0,0,45]) square([31.04, 31.04], true);
+                }
+                translate([0, 33, 18]) cylinder(2, r=5);
+                translate([0, -33, 18]) cylinder(2, r=5);
+                translate([-33, 0, 18]) cylinder(2, r=5);
             }
         }
         
@@ -127,29 +134,92 @@ module mount() {
         translate([-48, 0, -5]) rotate([0,0,45]) mirror([0, 0, 1]) nema17_hole(20);
         
         // motor knop hole        
-        translate([-48, 0, -5]) cylinder(2, r=12);
+        translate([-48, 0, -5]) cylinder(3.2, r=12);
         
         // screw hole for big gear
         translate([15.5, 0, -40]) cylinder(100, r=2.5+tol_x);
-        translate([0,0,-6]) linear_extrude(6) nutHole(3, units=MM, tolerance = +0.26, proj = 1);
         
         hull() {
             translate([-20, 0, -40]) cylinder(100, r=10);
             translate([-3, 0, -40]) cylinder(100, r=10);
         }
+        
+        // countersinks motor
+        translate([-48, 22, 9.2]) cylinder(20,r=3.2);
+        translate([-48, -22, 9.2]) cylinder(20,r=3.2);
+        translate([-70, 0, 9.2]) cylinder(20,r=3.2);
+        translate([15.5, 0, 12.8]) cylinder(20,r=4);
+        
+        // countersinks wall next to stepper motor
+        translate([-48, 32, 12]) cylinder(3.5,4,1,true);
+        translate([-48, -32, 12]) cylinder(3.5,4,1,true);
+        translate([-79, 0, 12]) cylinder(3.5,4,1,true);
+        translate([-48, 32, 12]) cylinder(20,r=1);
+        translate([-48, -32, 12]) cylinder(20,r=1);
+        translate([-79, 0, 12]) cylinder(20,r=1);
+        translate([-48, 32, -7.8]) cylinder(20,r=4.2);
+        translate([-48, -32, -7.8]) cylinder(20,r=4.2);
+        translate([-79, 0, -7.8]) cylinder(20,r=4.2);
+        
+        // countersink wall next to center of big gear
+        translate([27.5, 0,10.5]) cylinder(3.5,4,1,true);
+        translate([27.5, 0,10]) cylinder(20,r=1);
     }
+            
+}
+
+module wallMount() {
+    difference() {
+        union() {
+            hull() {
+                translate([0, 0, 15]) cylinder(3, r=5);
+                translate([-63.5, 22, 15]) cylinder(3, r=5);
+            
+            }
+            hull() {
+                translate([0, 0, 15]) cylinder(3, r=5);
+                translate([-63.5, -22, 15]) cylinder(3, r=5);
+            }
+            hull() {
+                translate([-85.5, 0, 15]) cylinder(3, r=5);
+                translate([-63.5, 22, 15]) cylinder(3, r=5);
+            }
+            hull() {
+                translate([-85.5, 0, 15]) cylinder(3, r=5);
+                translate([-63.5, -22, 15]) cylinder(3, r=5);
+            }
+            hull() {
+                translate([-63.5, 37, 15]) cylinder(3, r=5);
+                translate([-63.5, -37, 15]) cylinder(3, r=5);
+            }
+            hull() {
+                translate([-85.5, 0, 15]) cylinder(3, r=5);
+                translate([-100.5, 0, 15]) cylinder(3, r=5);
+            }
+            hull() {
+                translate([-8, 0, 15]) cylinder(3, r=7);
+                translate([15, 00, 15]) cylinder(3, r=5);
+            
+            }
+        }
+        translate([13, 0, 16]) cylinder(4.1,0.3,4,true);
+        translate([-97, 0, 16]) cylinder(4.1,0.3,4,true);
+        translate([-63.5, 34, 16]) cylinder(4.1,0.3,4,true);
+        translate([-63.5, -34, 16]) cylinder(4.1,0.3,4,true);
+        translate([0, 0, -40]) cylinder(100, r=2.5+tol_x);
+        translate([-63.5, 0, 8]) rotate([0,0,45]) mirror([0, 0, 1]) nema17_hole(20);
+        
+    }        
 }
 
 
 // gearing
 // rotate([0,0,-$t*90]) 
-gearWithArm(); 
-translate([-63.5,0,0]) rotate([0,0,$t*90+3.8]) small_gear(12);
+//gearWithArm(); 
+//translate([-63.5,0,0]) rotate([0,0,$t*90+3.8]) small_gear(12);
 
 // mount
-translate([-15.5,0,0]) mount();
+translate([-15.5,0,0]) motorMount();
+//wallMount();
 
-module nema() {
-    motor(Nema17, NemaShort);
-}
-translate([-48-15.5, 0, -5-20]) rotate([0,0,45]) mirror([0, 0, 1]) nema();
+//translate([-48-15.5, 0, -5-20]) rotate([0,0,45]) mirror([0, 0, 1]) nema();
