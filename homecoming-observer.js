@@ -1,4 +1,4 @@
-const ecovacsDeebot = require('./ecovacs-deebot.js')
+const ecovacsDeebot = require('ecovacs-deebot')
 const nodeMachineId = require('node-machine-id')
 const axios = require('axios').default
 const config = require('config')
@@ -42,7 +42,7 @@ const observe = async () => {
                 console.log('Garage door opens...')
 
                 let i = 0
-                while (response !== 200 && i < 60) {
+                while (response !== 200 && i < 5) {
                     i++;
                     console.log(`Error ${response}, retry open garage door #${i}`)
                     response = await openGarage()
@@ -51,8 +51,6 @@ const observe = async () => {
             }
         })
     })
-
-    vacbot.connect()
 
     process.on('SIGINT', function () {
         console.log("\nGracefully shutting down from SIGINT (Ctrl+C)")
