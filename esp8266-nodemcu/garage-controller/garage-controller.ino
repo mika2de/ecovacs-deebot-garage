@@ -33,7 +33,7 @@ const String password = "MY_PASSWORD";
 int status = WL_IDLE_STATUS;
 
 // NodeJs server
-const String host = "fritz.box";
+const String host = "michasrv";
 const int port = 80;
 const String url = "/start";
 int retry = 0;

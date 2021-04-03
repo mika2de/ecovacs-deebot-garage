@@ -2,7 +2,8 @@
   "name": "vacbot-homecoming-observer",
   "version": "1.0.0",
   "scripts": {
-    "start": "set NODE_ENV=production&&nodemon ./server.js",
+    "start": "export NODE_ENV=production; node ./server.js",    
+    "start_win": "set NODE_ENV=production&&nodemon ./server.js",
     "start_local": "node ./server.js"
   },
   "devDependencies": {
