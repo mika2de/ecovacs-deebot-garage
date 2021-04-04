@@ -1,4 +1,3 @@
-#include <Stepper.h>
 #include <BearSSLHelpers.h>
 #include <CertStoreBearSSL.h>
 #include <ESP8266WiFi.h>
@@ -27,6 +26,10 @@ const int stepPin = D2;
 const int dirPin = D3;
 const int openCloseSteps = 340;
 
+// force resistance sensor
+const int frsPin = D5;
+int frsValue;
+
 // Wifi
 const String ssid = "MY_SSID";
 const String password = "MY_PASSWORD";
@@ -48,11 +51,13 @@ void setup() {
   pinMode(stepPin, OUTPUT);
   pinMode(dirPin, OUTPUT);
 
+  pinMode(frsPin, INPUT);
+
   Serial.begin(9600);
   
   // vacuum bot leaves garage
   openDoor();
-  delay(15000);
+  delay(1500);
   closeDoor();
   
   connectWifi();
@@ -62,6 +67,14 @@ void setup() {
 
 void loop() {
   Serial.println("TODO: weight sensor should close door");
+  frsValue = analogRead(frsPin);
+  Serial.println("Analog reading = " + frsValue);
+  if (frsValue > 0) {
+    closeDoor();
+    delay(5000);
+  }
+ 
+  delay(500);
 }
 
 void connectWifi() {
@@ -82,13 +95,11 @@ void connectWifi() {
 
 void startAsyncServer(){
   server.on("/open", HTTP_GET, [](AsyncWebServerRequest * request) {
-    digitalWrite(ledPin, HIGH);
     Serial.println("OPEN");
     request->send_P(200, "application/json", "{ \"command\" : \"open\" }");
   });
 
   server.on("/close", HTTP_GET, [](AsyncWebServerRequest * request) {
-    digitalWrite(ledPin, LOW);
     Serial.println("CLOSE");
     request->send_P(200, "application/json", "{ \"command\" : \"close\" }");
   });
