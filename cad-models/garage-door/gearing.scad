@@ -28,11 +28,11 @@ module liftDoorArm() {
             translate([32,24,-10+tol_z]) rotate([0,0,3]) newGear(28,10-tol_z,7);
             translate([42,4,-10+tol_z]) cylinder(10-tol_z, r=18);
         }
-        translate([42,-65,-10+tol_z]) cylinder(10-tol_z, r=10);
+        translate([42,-55,-10+tol_z]) cylinder(10-tol_z, r=10);
     }
 }
 
-module gearWithArm() {
+module doubeGear() {
     rotate([0,0,35]) difference() {
         intersection() {
             newGear(77,10,0);
@@ -259,7 +259,7 @@ module wallMount() {
 
 // gearing
 // rotate([0,0,-$t*90]) 
-rotate([0,0,90]) gearWithArm(); 
+rotate([0,0,90]) doubeGear(); 
 //translate([-63.5,0,0]) rotate([0,0,$t*90+3.8]) small_gear(12);
 color("LightCyan") liftDoorArm();
 // mount
