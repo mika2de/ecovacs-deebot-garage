@@ -22,12 +22,18 @@ module newGear(teeth, gear_thickness, circle) {
 
 
 module liftDoorArm() {
-    translate([32,24,-10+tol_z]) rotate([0,0,3]) newGear(28,10-tol_z,7);
+    translate([32,24,-10+tol_z]) rotate([0,0,-2.5]) newGear(38,10-tol_z,5);
+
     hull() {
-        intersection() {
-            translate([32,24,-10+tol_z]) rotate([0,0,3]) newGear(28,10-tol_z,7);
-            translate([42,4,-10+tol_z]) cylinder(10-tol_z, r=18);
-        }
+    difference() {
+        translate([32,24,-10+tol_z]) rotate([0,0,-2.5]) newGear(38,10-tol_z,5);
+        translate([0,5,-11]) cube([80,60,12]);
+        //translate([0,8,-11]) cube([80,61,12]);
+    }
+//        intersection() {
+//            translate([32,24,-10+tol_z]) rotate([0,0,-2.5]) newGear(28,10-tol_z,7);
+//            translate([42,4,-10+tol_z]) cylinder(10-tol_z, r=18);
+//        }
         translate([42,-55,-10+tol_z]) cylinder(10-tol_z, r=10);
     }
 }
@@ -48,7 +54,7 @@ module doubeGear() {
             cylinder(14, r=10);
         } 
     }
-    translate([0,0,-10+tol_z]) color("LightYellow") newGear(28,10,7);
+    translate([0,0,-10+tol_z]) color("LightYellow") newGear(18,10,7);
     //rotate([0,0,-90]) liftDoorArm();
 
 }
@@ -263,7 +269,7 @@ rotate([0,0,90]) doubeGear();
 //translate([-63.5,0,0]) rotate([0,0,$t*90+3.8]) small_gear(12);
 color("LightCyan") liftDoorArm();
 // mount
-color("grey",1.0) translate([-15.5,0,0]) motorMount();
+//color("grey",1.0) translate([-15.5,0,0]) motorMount();
 //wallMount();
 
 //translate([-48-15.5, 0, -5-25]) rotate([0,0,45]) mirror([0, 0, 1]) nema();
