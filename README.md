@@ -9,3 +9,8 @@ tbd...
 ## Circuit diagram
 
 ![circuit diagram](./esp8266-nodemcu/circuit-diagram.png)
+
+## Run on server
+
+nohup npm start &
+disown 

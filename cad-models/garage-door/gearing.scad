@@ -39,21 +39,24 @@ module liftDoorArm() {
 }
 
 module doubeGear() {
-    rotate([0,0,35]) difference() {
-        intersection() {
-            newGear(77,10,0);
-            union() {
-                translate([-11,-11,-1]) cube(70);
-                translate([-11,-11,-1]) rotate([0,0,-45]) cube(70);
+    rotate([0,0,35]) 
+    difference() {
+        newGear(77,10,3);
+//        intersection() {
+//            newGear(77,10,0);
+//            union() {
+//                translate([-11,-11,-1]) cube(70);
+//                translate([-11,-11,-1]) rotate([0,0,-45]) cube(70);
             }
-        }
-        for(n = [1 : 4])
-                rotate([0, 0, -91 + n * 44])
+        
+        for(n = [1 : 3])
+                rotate([0, 0, -27 + n * 120])
         {
             translate([33,0,0])
-            cylinder(14, r=10);
-        } 
-    }
+            cylinder(50, r=10);
+        }
+    
+    
     translate([0,0,-10+tol_z]) color("LightYellow") newGear(18,10,7);
     //rotate([0,0,-90]) liftDoorArm();
 
@@ -269,7 +272,7 @@ rotate([0,0,90]) doubeGear();
 //translate([-63.5,0,0]) rotate([0,0,$t*90+3.8]) small_gear(12);
 color("LightCyan") liftDoorArm();
 // mount
-//color("grey",1.0) translate([-15.5,0,0]) motorMount();
+color("grey",1.0) translate([-15.5,0,0]) motorMount();
 //wallMount();
 
 //translate([-48-15.5, 0, -5-25]) rotate([0,0,45]) mirror([0, 0, 1]) nema();

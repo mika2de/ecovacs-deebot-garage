@@ -14,9 +14,9 @@ app.get('/health', async (req, res) => {
 
 })
 
-app.post('/start', async (req, res) => {
+app.get('/start', async (req, res) => {
     observer.observe()
-    res.send('Observer started')
+    res.send({ status: 'running' })
 })
 
 app.listen(port, () => {

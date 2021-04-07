@@ -12,7 +12,6 @@ ESP8266WebServer server(80);
 const String host = "MY_NODEJS_BACKEND_SERVICE_IP";
 const int port = 7080;
 const String url = "/start";
-int retry = 0;
 WiFiClient client;
 
 // Stepper motor
