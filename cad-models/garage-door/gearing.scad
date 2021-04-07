@@ -22,40 +22,29 @@ module newGear(teeth, gear_thickness, circle) {
 
 
 module liftDoorArm() {
-    translate([32,24,-10+tol_z]) rotate([0,0,-2.5]) newGear(38,10-tol_z,5);
-
-    hull() {
     difference() {
-        translate([32,24,-10+tol_z]) rotate([0,0,-2.5]) newGear(38,10-tol_z,5);
-        translate([0,5,-11]) cube([80,60,12]);
-        //translate([0,8,-11]) cube([80,61,12]);
+        translate([32,24,-10+tol_z]) rotate([0,0,17]) newGear(38,10-tol_z,11);
+        translate([32,24,-16+tol_z]) cylinder(10-tol_z, r=10);
     }
-//        intersection() {
-//            translate([32,24,-10+tol_z]) rotate([0,0,-2.5]) newGear(28,10-tol_z,7);
-//            translate([42,4,-10+tol_z]) cylinder(10-tol_z, r=18);
-//        }
+    hull() {
+        difference() {
+            translate([32,24,-10+tol_z]) rotate([0,0,-2.5]) newGear(38,10-tol_z,5);
+            translate([0,5,-11]) cube([80,60,12]);
+        }
         translate([42,-55,-10+tol_z]) cylinder(10-tol_z, r=10);
     }
 }
 
 module doubeGear() {
-    rotate([0,0,35]) 
     difference() {
         newGear(77,10,3);
-//        intersection() {
-//            newGear(77,10,0);
-//            union() {
-//                translate([-11,-11,-1]) cube(70);
-//                translate([-11,-11,-1]) rotate([0,0,-45]) cube(70);
-            }
-        
-        for(n = [1 : 3])
-                rotate([0, 0, -27 + n * 120])
+        color("black") for(n = [1 : 3])
+                rotate([0, 0, 60 + n * 120])
         {
-            translate([33,0,0])
-            cylinder(50, r=10);
+            translate([39,0,0])
+            cylinder(50, r=9);
         }
-    
+    }
     
     translate([0,0,-10+tol_z]) color("LightYellow") newGear(18,10,7);
     //rotate([0,0,-90]) liftDoorArm();
@@ -114,7 +103,7 @@ module motorMount() {
                         }
                     }            
                 // big gear cut
-                translate([25, 0, -tol_z]) cylinder(10+tol_z, r=68); 
+                translate([25, 0, -tol_z]) cylinder(10+2*tol_z, r=68); 
              }      
             // bottom arm
             difference() {
@@ -123,14 +112,6 @@ module motorMount() {
                     hull() {
                         translate([25+x_shift, 0, 10]) cylinder(5, r=46/2);
                         translate([-48, 0, 10]) cylinder(5, r=46/2);
-                    }
-                    hull() {
-                        translate([47.5, 24, 10]) cylinder(5, r=7);
-                        translate([-48, 0, 10]) cylinder(5, r=46/2);
-                    }
-                    hull() {
-                        translate([47.5, 24, 10]) cylinder(5, r=7);
-                        translate([25+x_shift, 0, 10]) cylinder(5, r=46/2);
                     }
                 }
                 // holes
@@ -148,12 +129,12 @@ module motorMount() {
                     
                     // screw hole for big gear
                     translate([15.5, 0, -40]) cylinder(100, r=2.5+tol_x);
-                    translate([15.5, 0, 12.4]) cylinder(20,r=4.3);
+                    translate([15.5, 0, 12.4]) cylinder(20,r=6);
                 }
             }
             // top arm 
             hull() {
-                translate([-48, 0, -4.8]) linear_extrude(5) minkowski() {
+                translate([-48, 0, -5.4]) linear_extrude(5) minkowski() {
                         circle(7.48);
                         rotate([0,0,45]) square([31.04, 31.04], true);
                 }
@@ -162,27 +143,23 @@ module motorMount() {
             difference() {
                 union() {
                     hull() {
-                        translate([47.5, 24, -14.8]) cylinder(5, r=7);
+                        translate([47.5, 24, -16.8]) cylinder(7, r=7);
                         translate([-12, 2, -14.8]) cube([5,16,5]);;
                     }
                     hull() {
-                        translate([47.5, 24, -14.8]) cylinder(5, r=7);
-                        translate([20, 0, -14.8]) cylinder(5, r=10);
+                        translate([47.5, 24, -16.8]) cylinder(7, r=7);
+                        translate([20, 0, -16.8]) cylinder(7, r=10);
                     }
-                    translate([47.5, 24, 0]) cylinder(10, r=7); 
                 }
+                // middle gear screw hole
                 translate([15.5, 0, -40]) cylinder(100, r=2.5+tol_x);
-                hull() {
-                    translate([38, 18, -15]) cylinder(7, r=3);
-                    translate([20, 0, -15]) cylinder(7, r=3);
-                }
             }
             difference() {
                 hull() {
                     translate([-12, -18, -14.8]) cube([5,36,5]);
-                    translate([20, 0, -14.8]) cylinder(5, r=10);
+                    translate([20, 0, -16.8]) cylinder(7, r=10);
                 }
-                translate([15.5, 0, -15.8]) cylinder(7, r=2.5);
+                translate([15.5, 0, -40]) cylinder(100, r=2.5);
             }
         }
         
@@ -213,11 +190,11 @@ module motorMount() {
         translate([-79, 0, -7.8]) cylinder(20,r=4.2);
         
         // countersink wall next to center of big gear
-        translate([42,10,10.5]) cylinder(3.5,4,1,true);
-        translate([42,10,10]) cylinder(20,r=1);
+        translate([42,0,10.5]) cylinder(3.5,4,1,true);
+        translate([42,0,10]) cylinder(20,r=1);
         
         // hole for 3rd gear
-        translate([47.5, 24, -15]) cylinder(40, r=2.5); 
+        translate([47.5, 24, -17]) cylinder(40, r=2.5); 
     }       
 }
 
