@@ -18,7 +18,7 @@ WiFiClient client;
 const int enablePin = D1;
 const int stepPin = D2;
 const int dirPin = D3;
-const int openCloseSteps = 720;
+const int openCloseSteps = 740; // steps to go from position 0 to open the door
 AccelStepper stepper = AccelStepper(AccelStepper::DRIVER, stepPin, dirPin);
 
 // force resistance sensor
@@ -87,7 +87,7 @@ void homecoming(){
   do {
     frsValue = analogRead(frsPin);
     delay(500);
-  } while (frsValue == 0);
+  } while (frsValue == 0); // wait for force resistance sensor signal, the quickly close the door before the power is turned off
   closeDoor();
 }
 
@@ -112,7 +112,7 @@ void closeDoor() {
 
 void openDoorWaitAndClose() {
   openDoor();
-  delay(1500);
+  delay(15000); // wait 15 sec. for robot to leave parking position
   closeDoor();
 }
 
