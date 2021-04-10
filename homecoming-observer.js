@@ -69,7 +69,7 @@ const observe = async () => {
 
 const openGarage = async () => {
     try {
-        const response = await axios.get(`${esp2866BaseUrl}/open`, {
+        const response = await axios.get(`${esp2866BaseUrl}/homecoming`, {
             timeout: 1000
         })
         console.log(`response.status=${response.status}`)

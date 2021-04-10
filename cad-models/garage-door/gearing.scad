@@ -112,6 +112,7 @@ module motorMount() {
                     hull() {
                         translate([25+x_shift, 0, 10]) cylinder(5, r=46/2);
                         translate([-48, 0, 10]) cylinder(5, r=46/2);
+                        translate([40, 55,  10]) cube([20,11,5]);
                     }
                 }
                 // holes
@@ -144,7 +145,8 @@ module motorMount() {
                 union() {
                     hull() {
                         translate([47.5, 24, -16.8]) cylinder(7, r=7);
-                        translate([-12, 2, -14.8]) cube([5,16,5]);;
+                        translate([-12, 2, -14.8]) cube([5,16,5]);
+                        translate([40, 55, -16.8]) cube([20,11,5]);
                     }
                     hull() {
                         translate([47.5, 24, -16.8]) cylinder(7, r=7);
@@ -154,6 +156,9 @@ module motorMount() {
                 // middle gear screw hole
                 translate([15.5, 0, -40]) cylinder(100, r=2.5+tol_x);
             }
+            
+            translate([40, 55, -16.8]) cube([20,11,30.8]);
+            
             difference() {
                 hull() {
                     translate([-12, -18, -14.8]) cube([5,36,5]);
@@ -195,7 +200,13 @@ module motorMount() {
         
         // hole for 3rd gear
         translate([47.5, 24, -17]) cylinder(40, r=2.5); 
-    }       
+        
+        // hole for fixing arm that suffers from high torque
+        translate([50, 60.5, -16.8]) cylinder(45,4,4,true);
+        translate([50, 60.5, -16.8]) cylinder(60,r=1,true);
+        translate([50, 60.5, 5.2]) cylinder(3.5,4,1,false); 
+        
+    }      
 }
 
 module wallMount() {
@@ -238,16 +249,15 @@ module wallMount() {
         translate([-63.5, -34, 16]) cylinder(4.1,0.3,4,true);
         translate([0, 0, -40]) cylinder(100, r=2.5+tol_x);
         translate([-63.5, 0, 8]) rotate([0,0,45]) mirror([0, 0, 1]) nema17_hole(20);
-        
     }        
 }
 
 
 // gearing
 // rotate([0,0,-$t*90]) 
-rotate([0,0,90]) doubeGear(); 
+//rotate([0,0,90]) doubeGear(); 
 //translate([-63.5,0,0]) rotate([0,0,$t*90+3.8]) small_gear(12);
-color("LightCyan") liftDoorArm();
+//color("LightCyan") liftDoorArm();
 // mount
 color("grey",1.0) translate([-15.5,0,0]) motorMount();
 //wallMount();

@@ -12,5 +12,7 @@ tbd...
 
 ## Run on server
 
+```bash
 nohup npm start &
 disown 
+```

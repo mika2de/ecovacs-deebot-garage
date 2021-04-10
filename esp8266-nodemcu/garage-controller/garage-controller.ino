@@ -112,7 +112,8 @@ void closeDoor() {
 
 void openDoorWaitAndClose() {
   openDoor();
-  delay(15000); // wait 15 sec. for robot to leave parking position
+  delay(30000); // wait 30 sec. for robot to leave parking position
+  
   closeDoor();
 }
 
