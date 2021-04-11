@@ -1,6 +1,6 @@
-# Automated kitchen base panel garage door
+#   
 
-tbd...
+Project log on https://hackaday.io/project/178993-space-saving-automated-robot-vacuum-cleaner-garage
 
 ## Overview
 
