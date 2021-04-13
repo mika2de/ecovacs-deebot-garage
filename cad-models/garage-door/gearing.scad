@@ -24,15 +24,16 @@ module newGear(teeth, gear_thickness, circle) {
 module liftDoorArm() {
     difference() {
         translate([32,24,-10+tol_z]) rotate([0,0,17]) newGear(38,10-tol_z,11);
-        translate([32,24,-16+tol_z]) cylinder(10-tol_z, r=10);
+        translate([32,24,-3+tol_z]) cylinder(10-tol_z, r=10);
     }
     hull() {
-        difference() {
+        intersection() {
             translate([32,24,-10+tol_z]) rotate([0,0,-2.5]) newGear(38,10-tol_z,5);
-            translate([0,5,-11]) cube([80,60,12]);
+            translate([55,45,-10+tol_z]) cylinder(10-tol_z, r=13);
         }
-        translate([42,-55,-10+tol_z]) cylinder(10-tol_z, r=10);
+        translate([85,85,-10+tol_z]) cylinder(10-2*tol_z, r=10);
     }
+
 }
 
 module doubeGear() {
@@ -255,9 +256,10 @@ module wallMount() {
 
 // gearing
 // rotate([0,0,-$t*90]) 
-//rotate([0,0,90]) doubeGear(); 
+rotate([0,0,90]) doubeGear(); 
 //translate([-63.5,0,0]) rotate([0,0,$t*90+3.8]) small_gear(12);
-//color("LightCyan") liftDoorArm();
+//translate([0,0,-40]) 
+color("LightCyan") liftDoorArm();
 // mount
 color("grey",1.0) translate([-15.5,0,0]) motorMount();
 //wallMount();
