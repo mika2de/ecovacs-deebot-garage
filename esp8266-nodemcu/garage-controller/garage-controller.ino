@@ -84,10 +84,12 @@ void handleNotFound(){
 
 void homecoming(){
   openDoor();
+  int counter = 0;
   do {
+    counter++;
     frsValue = analogRead(frsPin);
     delay(500);
-  } while (frsValue == 0); // wait for force resistance sensor signal, the quickly close the door before the power is turned off
+  } while (frsValue == 0 && counter <= 600); // wait for force resistance sensor signal, the quickly close the door before the power is turned off. Close door if robot wasn't able to return after 5min.
   closeDoor();
 }
 
