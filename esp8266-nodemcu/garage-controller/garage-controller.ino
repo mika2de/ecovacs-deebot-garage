@@ -42,10 +42,22 @@ void setup(){
   Serial.print("Attempting to connect to WPA ");
   Serial.println(ssid);
   if (WiFi.waitForConnectResult() != WL_CONNECTED) {
-    Serial.println("WiFi Failed!");
-    return;
+    Serial.println("WiFi connection attempt failed");
+    delay(10000); // wait 10 sec
+    WiFi.begin(ssid, password);
+    Serial.println("2nd attempt...");
+    if (WiFi.waitForConnectResult() != WL_CONNECTED) {
+      Serial.println("2nd attempt failed");
+      delay(60000); // wait 60 sec
+      WiFi.begin(ssid, password);
+      Serial.println("3rd attempt...");
+      if (WiFi.waitForConnectResult() != WL_CONNECTED) {
+        Serial.println("3rd attempt failed");
+        return;
+      }
+    }
   }
-  Serial.println("connected");
+  Serial.println("WiFi connected");
  
   Serial.println(WiFi.localIP());
 

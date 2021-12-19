@@ -6,12 +6,14 @@ const app = express()
 app.use(express.json())
 
 app.get('/health', async (req, res) => {
+    let status
     if (observer.isRunning()) {
-        res.send({ status: 'running' })
+        status = { status: 'running' }
     } else {
-        res.send({ status: 'up' })
+        status = { status: 'up' }
     }
-
+    console.log(status)
+    res.send(status)
 })
 
 app.get('/start', async (req, res) => {

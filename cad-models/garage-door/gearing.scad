@@ -253,15 +253,52 @@ module wallMount() {
     }        
 }
 
+module giantMount() {
+    translate([-15.5,0,10]) rotate([180,0,0]) difference() {
+        difference() {
+                translate([-48, 0, -5])
+                    union() {
+                        hull() {
+                            linear_extrude(20) minkowski() {
+                                circle(7.48);
+                                rotate([0,0,45]) square([31.04, 31.04], true);
+                            }
+                        translate([0, 33, 18]) cylinder(2, r=5);
+                        translate([0, -33, 18]) cylinder(2, r=5);
+                        translate([-33, 0, 18]) cylinder(2, r=5);
+                        }
+                    }            
+                // big gear cut
+                translate([25, 0, -tol_z]) cylinder(10+2*tol_z, r=68); 
+             }
+            
+                     // top hole for small gear 
+        translate([-48, 0, -tol_z]) cylinder(20, r=12);
+        
+        // motor screw holes
+        translate([-48, 0, -5]) rotate([0,0,45]) mirror([0, 0, 1]) nema17_hole(20);
+        
+        // motor knop hole        
+        translate([-48, 0, -5]) cylinder(3.2, r=12);
+        
+        // countersinks motor
+        translate([-48, 22, 9.2]) cylinder(20,r=3.2);
+        translate([-48, -22, 9.2]) cylinder(20,r=3.2);
+        translate([-70, 0, 9.2]) cylinder(20,r=3.2);
+    }
+                
+}
+
 
 // gearing
 // rotate([0,0,-$t*90]) 
 rotate([0,0,90]) doubeGear(); 
-//translate([-63.5,0,0]) rotate([0,0,$t*90+3.8]) small_gear(12);
+translate([-63.5,0,0]) rotate([0,0,$t*90+3.8]) small_gear(12);
 //translate([0,0,-40]) 
 color("LightCyan") liftDoorArm();
-// mount
-color("grey",1.0) translate([-15.5,0,0]) motorMount();
-//wallMount();
+// color("grey",0.2) translate([-15.5,0,0]) motorMount();
+// wallMount();
 
-//translate([-48-15.5, 0, -5-25]) rotate([0,0,45]) mirror([0, 0, 1]) nema();
+translate([-48-15.5, 0, -5-25]) rotate([0,0,45]) mirror([0, 0, 1]) nema();
+
+giantMount();
